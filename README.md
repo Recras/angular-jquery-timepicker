@@ -1,7 +1,7 @@
 angular-jquery-timepicker
 =====================
 
-An AngularJS directive for jQueryUI Timepicker (https://github.com/jonthornton/jquery-timepicker)
+An AngularJS directive for [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker)
 
 # Requirements
 
