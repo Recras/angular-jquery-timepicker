@@ -15,7 +15,7 @@ You can use Bower to install this directive.
 
 Add the timepicker module as a dependency to your applicatin module:
 
-    var myAppModule = angular.module('MyApp', [''ui.timepicker'])
+    var myAppModule = angular.module('MyApp', ['ui.timepicker'])
     
 
 Apply the directive to your form elements. This directive expects ng-model to be a valid javascript Date object.
