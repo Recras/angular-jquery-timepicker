@@ -1,0 +1,26 @@
+{
+  "name": "angular-jquery-timepicker",
+  "version": "0.1.0",
+  "description": "An AngularJS directive for jQuery Timepicker",
+  "main": "./src/timepickerdirective.js",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.3.3",
+    "grunt-karma": "~0.6.2"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "grunt karma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Recras/angular-jquery-timepicker.git"
+  },
+  "author": "https://github.com/Recras/angular-jquery-timepicker/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Recras/angular-jquery-timepicker/issues"
+  },
+  "homepage": "https://github.com/Recras/angular-jquery-timepicker"
+}
