@@ -17,7 +17,9 @@ angular.module('ui.timepicker', [])
         priority: 1,
         link: function(scope, element, attrs, ngModel) {
 
-            if(!ngModel) return; // do nothing if no ng-model
+            if(!ngModel) {
+                return; // do nothing if no ng-model
+            }
 
             var read = function() {
                 var datetime = element.timepicker('getTime', ngModel.$viewValue);
