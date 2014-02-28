@@ -10,7 +10,8 @@
             'src/timepickerdirective.min.js',
             'test/*.spec.js'
         ],
-        singleRun : true
+        singleRun : true,
+        browsers: ['Chrome', 'Firefox']
     });
   };
 
