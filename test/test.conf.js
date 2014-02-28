@@ -7,7 +7,7 @@
             'bower_components/angular/angular.min.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/jquery-timepicker-jt/jquery.timepicker.min.js',
-            'src/timepickerdirective.js',
+            'src/timepickerdirective.min.js',
             'test/*.spec.js'
         ],
         singleRun : true

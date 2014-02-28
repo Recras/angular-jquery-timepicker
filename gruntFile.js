@@ -2,9 +2,10 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // Default task.
-    grunt.registerTask('default', ['jshint', 'karma']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'karma']);
 
 
     // Project configuration.
@@ -16,7 +17,7 @@ module.exports = function (grunt) {
             }
         },
         jshint:{
-            files:['src/**/*.js', 'test/**/*.js'],
+            files:['src/timepickerdirective.js', 'test/**/*.js'],
             options:{
                 curly:true,
                 eqeqeq:true,
@@ -30,6 +31,13 @@ module.exports = function (grunt) {
                 globals:{}
             }
         },
+        uglify: {
+            dist: {
+                files: {
+                    'src/timepickerdirective.min.js': ['src/timepickerdirective.js']
+                }
+            }
+        }
     });
 
 };
