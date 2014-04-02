@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+    <head>
+        <link rel="stylesheet" type="text/css" media="screen" href="../bower_components/jquery-timepicker-jt/jquery.timepicker.css" />
+    </head>
+    <body>
+        <div ng-controller="TimepickerCtrl">
+            <span ng-model="date" ui-timepicker>click me</span>
+            <input ng-model="date" ui-timepicker id="testid"/>
+            {{ date | date:'medium' }}
+            <button ng-click="increaseDate(date)">Increase date</button>
+            <button ng-click="increaseHour(date)">Increase Hour</button>
+        </div>
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="../bower_components/angular-mocks/angular-mocks.js"></script>
+        <script type="text/javascript" src="../bower_components/jquery-timepicker-jt/jquery.timepicker.js"></script>
+        <script type="text/javascript" src="../src/timepickerdirective.js"></script>
+        <script type="text/javascript" src="demo.js"></script>
+    </body>
+</html>
