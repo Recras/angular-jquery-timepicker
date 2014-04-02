@@ -5,7 +5,7 @@
  */
 angular.module('ui.timepicker', [])
 
-.constant('uiTimepickerConfig', {
+.value('uiTimepickerConfig', {
     'step' : 15,
     'timeFormat': 'H:i'
 })
