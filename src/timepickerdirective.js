@@ -13,37 +13,36 @@ angular.module('ui.timepicker', [])
 .directive('uiTimepicker', ['uiTimepickerConfig', function(uiTimepickerConfig) {
     return {
         restrict: 'A',
-        require: '?ngModel',
+        require: 'ngModel',
         priority: 1,
         link: function(scope, element, attrs, ngModel) {
 
-            if(!ngModel) {
-                return; // do nothing if no ng-model
-            }
-
-            var read = function() {
-                var datetime = element.timepicker('getTime', ngModel.$viewValue);
-                ngModel.$setViewValue(datetime);
-                ngModel.$render();
-            };
-
             ngModel.$render = function () {
-                var date = ngModel.$viewValue;
+                var date = ngModel.$modelValue;
                 if ( angular.isDefined(date) && date !== null && !angular.isDate(date) ) {
                     throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + '.');
                 }
                 element.timepicker('setTime', date);
-                element.html(element.data('ui-timepicker-value'));
             };
+
+            ngModel.$parsers.unshift(function(viewValue){
+                var date = element.timepicker('getTime', ngModel.$modelValue);
+                return date;
+            });
+
+            scope.$watch(attrs.ngModel, function() {
+                ngModel.$render();
+            }, true);
 
             element.timepicker(uiTimepickerConfig);
 
             element.on('changeTime', function() {
                 if(!scope.$$phase) {
-                    scope.$apply(read);
+                    var date = element.timepicker('getTime', ngModel.$modelValue);
+                    ngModel.$setViewValue(date);
+                    scope.$apply();
                 }
             });
-            read();
         }
     };
 }]);
