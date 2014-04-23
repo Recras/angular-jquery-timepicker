@@ -22,7 +22,9 @@ angular.module('ui.timepicker', [])
                 if ( angular.isDefined(date) && date !== null && !angular.isDate(date) ) {
                     throw new Error('ng-Model value must be a Date object - currently it is a ' + typeof date + '.');
                 }
-                element.timepicker('setTime', date);
+                if (!element.is(":focus")) {
+                    element.timepicker('setTime', date);
+                }
             };
 
             ngModel.$parsers.unshift(function(viewValue){
