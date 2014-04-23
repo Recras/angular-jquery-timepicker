@@ -13,6 +13,8 @@ An AngularJS directive for [jquery-timepicker](https://github.com/jonthornton/jq
 
 You can use Bower to install this directive.
 
+    bower install angular-jquery-timepicker
+
 Add the timepicker module as a dependency to your applicatin module:
 
     var myAppModule = angular.module('MyApp', ['ui.timepicker'])
