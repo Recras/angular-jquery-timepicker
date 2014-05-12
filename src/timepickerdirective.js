@@ -33,6 +33,10 @@ angular.module('ui.timepicker', [])
             });
 
             scope.$watch(attrs.ngModel, function() {
+                var date = ngModel.$viewValue;
+                if ( angular.isDefined(date) && date !== null && !angular.isDate(date) ) {
+                    return;
+                }
                 ngModel.$render();
             }, true);
 
