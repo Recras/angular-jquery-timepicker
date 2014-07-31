@@ -39,11 +39,10 @@ angular.module('ui.timepicker', [])
             element.timepicker(uiTimepickerConfig);
 
             element.on('changeTime', function() {
-                if(!scope.$$phase) {
+                scope.$evalAsync(function() {
                     var date = element.timepicker('getTime', ngModel.$modelValue);
                     ngModel.$setViewValue(date);
-                    scope.$apply();
-                }
+                });
             });
         }
     };

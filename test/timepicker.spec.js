@@ -27,7 +27,9 @@ describe('uiTimepicker', function() {
                 var element, aDate;
                 aDate = new Date(2010, 12, 1, 14, 15);
                 element = $compile("<span ui-timepicker ng-model='x'/>")($rootScope);
-                $rootScope.$apply();
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
                 element.timepicker('setTime', aDate);
                 expect($rootScope.x.hour).toEqual(aDate.hour);
                 expect($rootScope.x.minute).toEqual(aDate.minute);
@@ -60,7 +62,9 @@ describe('uiTimepicker', function() {
                 var element, aDate;
                 aDate = new Date(2010, 12, 1, 14, 15);
                 element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
-                $rootScope.$apply();
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
                 element.timepicker('setTime', aDate);
                 expect($rootScope.x.hour).toEqual(aDate.hour);
                 expect($rootScope.x.minute).toEqual(aDate.minute);
