@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="testApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -11,6 +11,7 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="bower_components/jquery-timepicker-jt/jquery.timepicker.css" />
   </head>
   <body>
     <div class="wrapper">
@@ -57,6 +58,36 @@
 
 <pre><code>&lt;input ui-timepicker ng-model="someDateObject"&gt;
 </code></pre>
+
+
+<h1>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Demo</h1>
+
+<div ng-controller="TimepickerCtrl">
+  <p>
+    Input: <input ng-model="date" ui-timepicker/>
+
+<pre><code>&lt;input ng-model="date" ui-timepicker/&gt;
+</code></pre>
+  <p>
+
+  <p>
+    Span (clickable): <span ng-model="date" ui-timepicker>{{ date | date:'shortTime' }}</span>
+
+    <pre><code ng-non-bindable>&lt;span ng-model="date" ui-timepicker&gt;{{ date | date:'shortTime' }}&lt;/span&gt;
+</code></pre>
+  </p>
+
+  <p>
+    <button ng-click="increaseDate(date)">Increase date</button>
+    <button ng-click="increaseHour(date)">Increase Hour</button>
+  </p>
+  <p>
+    {{ date | date:'medium' }}
+  </p>
+
+</div>
+
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/Recras">Recras</a></p>
@@ -64,6 +95,11 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-timepicker-jt/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="javascripts/timepickerdirective.min.js"></script>
+    <script type="text/javascript" src="javascripts/demo.js"></script>
   </body>
 </html>
