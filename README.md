@@ -3,6 +3,8 @@ angular-jquery-timepicker [![Build Status](https://travis-ci.org/Recras/angular-
 
 An AngularJS directive for [jquery-timepicker](https://github.com/jonthornton/jquery-timepicker)
 
+[See a demo here](http://recras.github.io/angular-jquery-timepicker/)
+
 # Requirements
 
 - AngularJS
