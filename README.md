@@ -20,9 +20,19 @@ You can use Bower to install this directive.
 Add the timepicker module as a dependency to your applicatin module:
 
     var myAppModule = angular.module('MyApp', ['ui.timepicker'])
-    
+
 
 Apply the directive to your form elements. This directive expects ng-model to be a valid javascript Date object.
 
     <input ui-timepicker ng-model="someDateObject">
 
+
+Adding custom options to timepicker.
+
+    $scope.timePickerOptions = {
+        step: 20,
+        timeFormat: 'g:ia',
+        appendTo: 'body'
+    };
+
+    <input ui-timepicker="timePickerOptions" ng-model="someDateObject">
