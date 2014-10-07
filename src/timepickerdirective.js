@@ -28,11 +28,6 @@ angular.module('ui.timepicker', [])
                 }
             };
 
-            ngModel.$parsers.unshift(function(){
-                var date = element.timepicker('getTime', ngModel.$modelValue);
-                return date;
-            });
-
             scope.$watch(attrs.ngModel, function() {
                 ngModel.$render();
             }, true);
@@ -47,12 +42,19 @@ angular.module('ui.timepicker', [])
                 )
             );
 
-            element.on('changeTime', function() {
-                scope.$evalAsync(function() {
+            if(element.is('input'))  {
+                ngModel.$parsers.unshift(function(){
                     var date = element.timepicker('getTime', ngModel.$modelValue);
-                    ngModel.$setViewValue(date);
+                    return date;
                 });
-            });
+            } else {
+                element.on('changeTime', function() {
+                    scope.$evalAsync(function() {
+                        var date = element.timepicker('getTime', ngModel.$modelValue);
+                        ngModel.$setViewValue(date);
+                    });
+                });
+            }
         }
     };
 }]);
