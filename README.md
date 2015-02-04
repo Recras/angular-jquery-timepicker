@@ -30,6 +30,13 @@ Apply the directive to your form elements. This directive expects ng-model to be
 
     <input ui-timepicker ng-model="someDateObject">
 
+Configure timepicker at a global level.  Use the 'asMoment' to use moment.js instead of Date as the ng-model.
+
+    angular.module('ui.timepicker').value('uiTimepickerConfig',{
+      step: 5,
+      asMoment: true
+    });
+
 
 Adding custom options to timepicker.
 
