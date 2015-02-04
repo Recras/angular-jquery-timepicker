@@ -72,4 +72,28 @@ describe('uiTimepicker', function() {
         });
 
     });
+
+    describe('when ngModel is a moment', function() {
+        beforeEach(function () {
+            angular.module('ui.timepicker').value('uiTimepickerConfig', {
+                step: 5,
+                asMoment: true
+            });
+        });
+
+        it('should be able to get the date from the model', function() {
+            inject(function($compile, $rootScope) {
+                var element, aMoment;
+                aMoment = moment("2010-12-01 07:14:00");
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aMoment;
+                });
+                expect(element.timepicker('getTime', aMoment)).toEqual(aMoment.toDate());
+                $rootScope.$apply(function() {
+                   expect(moment.isMoment($rootScope.x)).toBeTruthy();
+                });
+            });
+        });
+    });
 });
