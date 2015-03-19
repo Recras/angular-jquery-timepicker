@@ -21,6 +21,10 @@ angular.module('ui.timepicker', [])
     return {
         restrict: 'A',
         require: 'ngModel',
+        scope: {
+            ngModel: '=',
+            baseDate: '=',
+        },
         priority: 1,
         link: function(scope, element, attrs, ngModel) {
             'use strict';
@@ -30,7 +34,7 @@ angular.module('ui.timepicker', [])
 
             ngModel.$render = function () {
                 var date = ngModel.$modelValue;
-                if (!isDateOrMoment(date)) {
+                if (angular.isDefined(date) && date !== null && !isDateOrMoment(date)) {
                     throw new Error('ng-Model value must be a Date or Moment object - currently it is a ' + typeof date + '.');
                 }
                 if (isAMoment(date)) {
@@ -56,7 +60,8 @@ angular.module('ui.timepicker', [])
             );
 
             var asDate = function() {
-                return isAMoment(ngModel.$modelValue) ? ngModel.$modelValue.toDate() : ngModel.$modelValue;
+                var baseDate = ngModel.$modelValue ? ngModel.$modelValue : scope.baseDate;
+                return isAMoment(baseDate) ? baseDate.toDate() : baseDate;
             };
 
             var asMomentOrDate = function(date) {

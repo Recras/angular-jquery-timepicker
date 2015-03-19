@@ -26,9 +26,13 @@ Add the timepicker module as a dependency to your applicatin module:
     var myAppModule = angular.module('MyApp', ['ui.timepicker'])
 
 
-Apply the directive to your form elements. This directive expects ng-model to be a valid javascript Date object.
+Apply the directive to your form elements. This directive expects ng-model to be a valid javascript Date object (or null).
 
     <input ui-timepicker ng-model="someDateObject">
+
+You can specify a base-date that will be used to initialize the ng-model when it is null
+
+    <input ui-timepicker ng-model="someNullObject" base-date"someDateObject">
 
 Configure timepicker at a global level.  Use the 'asMoment' to use moment.js instead of Date as the ng-model. Note: moment.js timezones will be discarded.
 
