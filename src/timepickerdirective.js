@@ -71,6 +71,7 @@ angular.module('ui.timepicker', [])
             if(element.is('input'))  {
                 ngModel.$parsers.unshift(function(){
                     var date = element.timepicker('getTime', asDate() );
+                    ngModel.$setValidity('time', date !== null);
                     return asMomentOrDate(date);
                 });
             } else {
