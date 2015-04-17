@@ -24,6 +24,7 @@ angular.module('ui.timepicker', [])
         scope: {
             ngModel: '=',
             baseDate: '=',
+            uiTimepicker: '=',
         },
         priority: 1,
         link: function(scope, element, attrs, ngModel) {
@@ -53,8 +54,8 @@ angular.module('ui.timepicker', [])
 
             element.timepicker(
                 angular.extend(
-                    config, attrs.uiTimepicker ?
-                    $parse(attrs.uiTimepicker)(scope):
+                    config, scope.uiTimepicker ?
+                    scope.uiTimepicker :
                     {}
                 )
             );
