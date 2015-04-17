@@ -124,4 +124,24 @@ describe('uiTimepicker', function() {
             });
         });
     });
+
+    describe('using custom options', function() {
+        it('should work with custom options', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate, opts;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                opts = {
+                    timeFormat: 'H:i',
+                };
+                $rootScope.$apply(function() {
+                    $rootScope.opts = opts;
+                });
+                element = $compile("<input ui-timepicker='opts' ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+                expect(element.val()).toEqual('14:15');
+            });
+        });
+    });
 });
