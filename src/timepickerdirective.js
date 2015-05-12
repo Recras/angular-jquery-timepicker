@@ -9,9 +9,9 @@ angular.module('ui.timepicker', [])
     'step' : 15
 })
 
-.directive('uiTimepicker', ['uiTimepickerConfig','$parse', function(uiTimepickerConfig, $parse) {
+.directive('uiTimepicker', ['uiTimepickerConfig','$parse', '$window', function(uiTimepickerConfig, $parse, $window) {
     var isAMoment = function(date) {
-        return moment !== undefined && moment.isMoment(date) && date.isValid();
+        return $window.moment !== undefined && $window.moment.isMoment(date) && date.isValid();
     };
     var isDateOrMoment = function(date) {
         return angular.isDefined(date) && date !== null &&
@@ -66,7 +66,7 @@ angular.module('ui.timepicker', [])
             };
 
             var asMomentOrDate = function(date) {
-                return asMoment ? moment(date) : date;
+                return asMoment ? $window.moment(date) : date;
             };
 
             if(element.is('input'))  {
