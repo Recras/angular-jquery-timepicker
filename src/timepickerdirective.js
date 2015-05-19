@@ -9,7 +9,9 @@ angular.module('ui.timepicker', [])
     'step' : 15
 })
 
-.directive('uiTimepicker', ['uiTimepickerConfig','$parse', function(uiTimepickerConfig, $parse) {
+.directive('uiTimepicker', ['uiTimepickerConfig','$parse', '$window', function(uiTimepickerConfig, $parse, $window) {
+    var moment = $window.moment;
+
     var isAMoment = function(date) {
         return moment !== undefined && moment.isMoment(date) && date.isValid();
     };
