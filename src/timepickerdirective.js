@@ -64,11 +64,11 @@ angular.module('ui.timepicker', [])
 
             var userInput = function() {
                 return angular.element.trim(element.val());
-            }
+            };
 
             var invalidInput = function(){
               return userInput() && ngModel.$modelValue === null;
-            }
+            };
 
             var asDate = function() {
                 var baseDate = ngModel.$modelValue ? ngModel.$modelValue : scope.baseDate;
