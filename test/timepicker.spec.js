@@ -99,6 +99,34 @@ describe('uiTimepicker', function() {
             });
         });
 
+        it('should mark model invalid for blank input when required', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                element = $compile("<input ui-timepicker required ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+
+                element.val('').trigger('input');
+                expect(element.hasClass('ng-invalid-time')).toBe(true);
+            });
+        });
+
+        it('should mark model valid for blank input when not required', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+
+                element.val('').trigger('input');
+                expect(element.hasClass('ng-invalid-time')).toBe(false);
+            });
+        });
+
     });
 
     describe('when ngModel is a moment', function() {

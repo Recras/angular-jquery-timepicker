@@ -74,10 +74,11 @@ angular.module('ui.timepicker', [])
             if(element.is('input'))  {
                 ngModel.$parsers.unshift(function(){
                     var date = element.timepicker('getTime', asDate() );
-                    return asMomentOrDate(date);
+                    return date ? asMomentOrDate(date) : date;
                 });
                 ngModel.$validators.time = function(modelValue){
-                    return (!attrs.required && !modelValue) ? true : isDateOrMoment(modelValue);
+                    var userInput = angular.element.trim(element.val());
+                    return (!attrs.required && !userInput) ? true : isDateOrMoment(modelValue);
                 };
             } else {
                 element.on('changeTime', function() {
