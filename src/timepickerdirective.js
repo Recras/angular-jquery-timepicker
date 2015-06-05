@@ -52,7 +52,7 @@ angular.module('ui.timepicker', [])
                 ngModel.$render();
             }, true);
 
-            config.appendTo = element.parent();
+            config.appendTo = config.appendTo || element.parent();
 
             element.timepicker(
                 angular.extend(
