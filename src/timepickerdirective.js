@@ -62,6 +62,10 @@ angular.module('ui.timepicker', [])
                 )
             );
 
+            element.on('$destroy', function(){
+                element.timepicker('remove');
+            });
+
             var asDate = function() {
                 var baseDate = ngModel.$modelValue ? ngModel.$modelValue : scope.baseDate;
                 return isAMoment(baseDate) ? baseDate.toDate() : baseDate;
