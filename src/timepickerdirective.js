@@ -52,7 +52,7 @@ angular.module('ui.timepicker', [])
                 ngModel.$render();
             }, true);
 
-            config.appendTo = element.parent();
+            config.appendTo = config.appendTo || element.parent();
 
             element.timepicker(
                 angular.extend(
@@ -69,6 +69,10 @@ angular.module('ui.timepicker', [])
             var invalidInput = function(){
               return userInput() && ngModel.$modelValue === null;
             };
+
+            element.on('$destroy', function(){
+                element.timepicker('remove');
+            });
 
             var asDate = function() {
                 var baseDate = ngModel.$modelValue ? ngModel.$modelValue : scope.baseDate;
