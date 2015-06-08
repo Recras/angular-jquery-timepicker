@@ -37,7 +37,7 @@ angular.module('ui.timepicker', [])
 
             ngModel.$render = function () {
                 var date = ngModel.$modelValue;
-                if (angular.isDefined(date) && date !== null && !isDateOrMoment(date)) {
+                if (angular.isDefined(date) && date !== null && date !== '' && !isDateOrMoment(date)) {
                     throw new Error('ng-Model value must be a Date or Moment object - currently it is a ' + typeof date + '.');
                 }
                 if (isAMoment(date)) {
@@ -72,7 +72,11 @@ angular.module('ui.timepicker', [])
             };
 
             if(element.is('input'))  {
-                ngModel.$parsers.unshift(function(){
+                ngModel.$parsers.unshift(function(viewValue){
+                    if (angular.isUndefined(attrs.required) && viewValue === '') {
+                        ngModel.$setValidity('time', true);
+                        return viewValue;
+                    }
                     var date = element.timepicker('getTime', asDate() );
                     ngModel.$setValidity('time', date !== null);
                     return asMomentOrDate(date);
