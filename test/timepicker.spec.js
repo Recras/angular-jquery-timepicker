@@ -172,4 +172,60 @@ describe('uiTimepicker', function() {
             });
         });
     });
+
+    describe('using required', function() {
+        it('should be valid if not required and blank', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = '';
+                });
+                expect(element.hasClass('ng-valid')).toBe(true);
+                expect(element.hasClass('ng-invalid')).toBe(false);
+            });
+        });
+
+        it('should be invalid if required and blank', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                element = $compile("<input ui-timepicker ng-model='x' required/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = '';
+                });
+                expect(element.hasClass('ng-valid')).toBe(false);
+                expect(element.hasClass('ng-invalid')).toBe(true);
+            });
+        });
+
+        it('should be valid if not required and input is cleared', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+
+                element.val('').trigger('input');
+                expect(element.hasClass('ng-valid')).toBe(true);
+                expect(element.hasClass('ng-invalid')).toBe(false);
+            });
+        });
+
+        it('should be invalid if required and input is cleared', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                element = $compile("<input ui-timepicker ng-model='x' required/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+
+                element.val('').trigger('input');
+                expect(element.hasClass('ng-valid')).toBe(false);
+                expect(element.hasClass('ng-invalid')).toBe(true);
+            });
+        });
+    });
 });
