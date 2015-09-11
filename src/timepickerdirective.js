@@ -15,9 +15,12 @@ angular.module('ui.timepicker', [])
     var isAMoment = function(date) {
         return moment !== undefined && moment.isMoment(date) && date.isValid();
     };
+    var isDateString = function (date) {
+        return (new Date(date) !== "Invalid Date" && !isNaN(new Date(date)));
+    };
     var isDateOrMoment = function(date) {
         return angular.isDefined(date) && date !== null &&
-          ( angular.isDate(date) || isAMoment(date) );
+          (angular.isDate(date) || isAMoment(date) || isDateString(date));
     };
 
     return {
@@ -42,6 +45,9 @@ angular.module('ui.timepicker', [])
                 }
                 if (isAMoment(date)) {
                     date = date.toDate();
+                } else if (typeof date === 'string') {
+                    // Convert the date since this is a date string
+                    date = new Date(date);
                 }
                 if (!element.is(':focus') && !invalidInput()) {
                     element.timepicker('setTime', date);
@@ -61,7 +67,7 @@ angular.module('ui.timepicker', [])
                     {}
                 )
             );
-
+            
             var userInput = function() {
                 return angular.element.trim(element.val());
             };
@@ -85,7 +91,7 @@ angular.module('ui.timepicker', [])
 
             if(element.is('input'))  {
                 ngModel.$parsers.unshift(function(viewValue){
-                    if (angular.isUndefined(attrs.required) && viewValue === '') {
+                    if (attrs.required && viewValue === '') {
                         ngModel.$setValidity('time', true);
                         return viewValue;
                     }
