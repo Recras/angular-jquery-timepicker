@@ -48,7 +48,7 @@ angular.module('ui.timepicker', [])
                 }
             };
 
-            scope.$watch(attrs.ngModel, function() {
+            scope.$watch('ngModel', function() {
                 ngModel.$render();
             }, true);
 
