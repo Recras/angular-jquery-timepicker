@@ -63,7 +63,7 @@ angular.module('ui.timepicker', [])
             );
 
             var userInput = function() {
-                return angular.element.trim(element.val());
+                return element.val().trim();
             };
 
             var invalidInput = function(){
