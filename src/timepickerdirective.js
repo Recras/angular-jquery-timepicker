@@ -3,14 +3,14 @@
  Directive for jQuery UI timepicker (http://jonthornton.github.io/jquery-timepicker/)
 
  */
-var module = angular.module('ui.timepicker', []);
+var m = angular.module('ui.timepicker', []);
 
 
-module.value('uiTimepickerConfig', {
+m.value('uiTimepickerConfig', {
     'step': 15
 });
 
-module.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function(uiTimepickerConfig, $parse, $window) {
+m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function(uiTimepickerConfig, $parse, $window) {
     var moment = $window.moment;
 
     var isAMoment = function(date) {
