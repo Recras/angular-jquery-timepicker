@@ -3,13 +3,14 @@
  Directive for jQuery UI timepicker (http://jonthornton.github.io/jquery-timepicker/)
 
  */
-angular.module('ui.timepicker', [])
+var module = angular.module('ui.timepicker', []);
 
-.value('uiTimepickerConfig', {
-    'step' : 15
-})
 
-.directive('uiTimepicker', ['uiTimepickerConfig','$parse', '$window', function(uiTimepickerConfig, $parse, $window) {
+module.value('uiTimepickerConfig', {
+    'step': 15
+});
+
+module.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function(uiTimepickerConfig, $parse, $window) {
     var moment = $window.moment;
 
     var isAMoment = function(date) {
@@ -17,7 +18,7 @@ angular.module('ui.timepicker', [])
     };
     var isDateOrMoment = function(date) {
         return angular.isDefined(date) && date !== null &&
-          ( angular.isDate(date) || isAMoment(date) );
+            (angular.isDate(date) || isAMoment(date));
     };
 
     return {
@@ -35,7 +36,7 @@ angular.module('ui.timepicker', [])
             var asMoment = config.asMoment || false;
             delete config.asMoment;
 
-            ngModel.$render = function () {
+            ngModel.$render = function() {
                 var date = ngModel.$modelValue;
                 if (angular.isDefined(date) && date !== null && date !== '' && !isDateOrMoment(date)) {
                     throw new Error('ng-Model value must be a Date or Moment object - currently it is a ' + typeof date + '.');
@@ -57,8 +58,8 @@ angular.module('ui.timepicker', [])
             element.timepicker(
                 angular.extend(
                     config, scope.uiTimepicker ?
-                    scope.uiTimepicker :
-                    {}
+                        scope.uiTimepicker :
+                        {}
                 )
             );
 
@@ -66,11 +67,11 @@ angular.module('ui.timepicker', [])
                 return element.val().trim();
             };
 
-            var invalidInput = function(){
-              return userInput() && ngModel.$modelValue === null;
+            var invalidInput = function() {
+                return userInput() && ngModel.$modelValue === null;
             };
 
-            element.on('$destroy', function(){
+            element.on('$destroy', function() {
                 element.timepicker('remove');
             });
 
@@ -83,18 +84,18 @@ angular.module('ui.timepicker', [])
                 return asMoment ? moment(date) : date;
             };
 
-            if(element.is('input'))  {
-                ngModel.$parsers.unshift(function(viewValue){
-                    var date = element.timepicker('getTime', asDate() );
+            if (element.is('input')) {
+                ngModel.$parsers.unshift(function(viewValue) {
+                    var date = element.timepicker('getTime', asDate());
                     return date ? asMomentOrDate(date) : date;
                 });
-                ngModel.$validators.time = function(modelValue){
+                ngModel.$validators.time = function(modelValue) {
                     return (!attrs.required && !userInput()) ? true : isDateOrMoment(modelValue);
                 };
             } else {
                 element.on('changeTime', function() {
                     scope.$evalAsync(function() {
-                        var date = element.timepicker('getTime', asDate() );
+                        var date = element.timepicker('getTime', asDate());
                         ngModel.$setViewValue(date);
                     });
                 });
