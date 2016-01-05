@@ -228,4 +228,39 @@ describe('uiTimepicker', function() {
             });
         });
     });
+
+    describe('when ngModel is undefined', function() {
+        it('should be able to get the date from the model', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+                expect(aDate).toBeUndefined();
+                expect(element.timepicker('getTime', aDate)).toEqual(aDate);
+            });
+        });
+
+        it('should put a new date in the model', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate, bDate;
+                bDate = new Date(2010, 12, 1, 14, 15);
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+                expect(aDate).toBeUndefined();
+                expect(element.timepicker('getTime', aDate)).toEqual(aDate);
+
+                $rootScope.$apply(function() {
+                    $rootScope.x = bDate;
+                });
+                element.timepicker('setTime', bDate);
+                expect($rootScope.x.hour).toEqual(bDate.hour);
+                expect($rootScope.x.minute).toEqual(bDate.minute);
+            });
+        });
+    });
 });
