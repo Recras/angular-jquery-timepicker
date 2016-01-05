@@ -17,8 +17,7 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
         return moment !== undefined && moment.isMoment(date) && date.isValid();
     };
     var isDateOrMoment = function(date) {
-        return angular.isDefined(date) && date !== null &&
-            (angular.isDate(date) || isAMoment(date));
+        return date !== null && (angular.isDate(date) || isAMoment(date));
     };
 
     return {
@@ -38,7 +37,10 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
 
             ngModel.$render = function() {
                 var date = ngModel.$modelValue;
-                if (angular.isDefined(date) && date !== null && date !== '' && !isDateOrMoment(date)) {
+                if (!angular.isDefined(date)) {
+                    return;
+                }
+                if (date !== null && date !== '' && !isDateOrMoment(date)) {
                     throw new Error('ng-Model value must be a Date or Moment object - currently it is a ' + typeof date + '.');
                 }
                 if (isAMoment(date)) {
