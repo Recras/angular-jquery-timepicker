@@ -49,6 +49,9 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
                 if (!element.is(':focus') && !invalidInput()) {
                     element.timepicker('setTime', date);
                 }
+                if(date === null){
+                    resetInput();
+                }
             };
 
             scope.$watch('ngModel', function() {
@@ -64,6 +67,10 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
                         {}
                 )
             );
+
+            var resetInput = function(){
+                element.timepicker('setTime', null);
+            };
 
             var userInput = function() {
                 return element.val().trim();
