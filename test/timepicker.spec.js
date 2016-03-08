@@ -126,7 +126,23 @@ describe('uiTimepicker', function() {
                 expect(element.hasClass('ng-invalid-time')).toBe(false);
             });
         });
+        
+        it('should be able to reset input value when model is reset to null', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                element = $compile("<input ui-timepicker ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
 
+                $rootScope.$apply(function() {
+                    $rootScope.x = null;
+                });
+
+                expect(element.val()).toEqual('');
+            });
+        });
     });
 
     describe('when ngModel is a moment', function() {
