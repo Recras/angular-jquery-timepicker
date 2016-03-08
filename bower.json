@@ -1,6 +1,6 @@
 {
   "name": "angular-jquery-timepicker",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "homepage": "https://github.com/Recras/angular-jquery-timepicker",
   "description": "An AngularJS directive for jQuery Timepicker",
   "main": "./src/timepickerdirective.js",
