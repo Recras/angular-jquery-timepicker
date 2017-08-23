@@ -187,6 +187,31 @@ describe('uiTimepicker', function() {
                 expect(element.val()).toEqual('14:15');
             });
         });
+
+        it('should update the custom options when they change', function() {
+            inject(function($compile, $rootScope) {
+                var element, aDate, opts;
+                aDate = new Date(2010, 12, 1, 14, 15);
+                opts = {
+                   timeFormat: 'H:i'
+                };
+                element = $compile("<input ui-timepicker='opts' ng-model='x'/>")($rootScope);
+                $rootScope.$apply(function() {
+                    $rootScope.opts = opts;
+                });
+                $rootScope.$apply(function() {
+                    $rootScope.x = aDate;
+                });
+                expect(element.val()).toEqual('14:15');
+                opts = {
+                    timeFormat: 'H:i A'
+                };
+                $rootScope.$apply(function() {
+                    $rootScope.opts = opts;
+                });
+                expect(element.val()).toEqual('14:15 PM');
+            });
+        });
     });
 
     describe('using required', function() {
