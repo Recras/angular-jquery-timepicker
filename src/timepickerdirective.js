@@ -66,7 +66,8 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
                         scope.uiTimepicker :
                         {}
                     )
-            );
+                );
+                ngModel.$render();
             }, true);
 
             config.appendTo = config.appendTo || element.parent();
