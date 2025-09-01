@@ -109,7 +109,8 @@ m.directive('uiTimepicker', ['uiTimepickerConfig', '$parse', '$window', function
                 if(element.attr('type') === 'time') {
                     ngModel.$parsers.unshift(function(viewValue) {
                         var date = element.timepicker('getTime', asDate());
-                        return ("0" + date.getUTCHours()).slice(-2) + ':' + ("0" + date.getUTCMinutes()).slice(-2);
+                        // Return local time (HH:mm) to avoid unintended UTC conversion
+                        return ("0" + date.getHours()).slice(-2) + ':' + ("0" + date.getMinutes()).slice(-2);
                     });
                 } else {
                     ngModel.$parsers.unshift(function(viewValue) {
